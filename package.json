@@ -1,0 +1,45 @@
+{
+  "name": "my-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env PORT=3008 react-scripts start",
+    "start:memory": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" PORT=3008 react-scripts start",
+    "build": "react-scripts build",
+    "build:memory": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" react-scripts build",
+    "test": "react-scripts test",
+    "test:memory": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" react-scripts test",
+    "eject": "react-scripts eject",
+    "vercel-build": "react-scripts build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "cross-env": "^7.0.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-scripts": "^5.0.1",
+    "typescript": "^4.9.5"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.4.1"
+  }
+}
