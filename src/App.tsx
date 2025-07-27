@@ -63,7 +63,6 @@ const App = () => {
   const [growthAnimation, setGrowthAnimation] = useState<{playerId: string, type: string} | null>(null);
   const [stepAnimation, setStepAnimation] = useState<number | null>(null);
   const [diceRoll, setDiceRoll] = useState<number | null>(null);
-  const [showDiceResult, setShowDiceResult] = useState(false);
   const [lastChancePlayer, setLastChancePlayer] = useState<string | null>(null);
   const [lastChanceResult, setLastChanceResult] = useState<{success: boolean, roll: number} | null>(null);
   const [skipNextTurn, setSkipNextTurn] = useState<Record<string, boolean>>({});
@@ -102,7 +101,6 @@ const App = () => {
     setCompletedArtworks({});
     setSelectedArtwork(null);
     setDiceRoll(null);
-    setShowDiceResult(false);
     setLastChancePlayer(null);
     setLastChanceResult(null);
   };
@@ -298,7 +296,6 @@ const App = () => {
     
     const roll = Math.floor(Math.random() * 6) + 1;
     setDiceRoll(roll);
-    setShowDiceResult(true);
     
     let targetPosition = Math.min(currentPlayer.position + roll, 80);
     
@@ -313,8 +310,12 @@ const App = () => {
     setStepAnimation(targetPosition);
     setTimeout(() => {
       setStepAnimation(null);
-      setShowDiceResult(false);
     }, 1200);
+    
+    // サイコロ結果を3秒後にクリア
+    setTimeout(() => {
+      setDiceRoll(null);
+    }, 3000);
     
     if (square?.type === 'event' && square.growthType) {
       const growthType = square.growthType as '感性' | '技術力' | '創造力';
@@ -674,38 +675,12 @@ const App = () => {
                   </span>
                 </button>
                 
-                {/* サイコロ結果表示 */}
-                {showDiceResult && diceRoll && (
-                  <div className="flex items-center gap-4 bg-black/70 border border-amber-400/40 rounded-lg px-6 py-3 backdrop-blur-sm shadow-xl animate-bounce">
-                    {/* 芸術的なサイコロ表示 */}
-                    <div className="relative animate-dice-appear">
-                      <div className="w-12 h-12 bg-gradient-to-br from-amber-100 to-amber-200 border-2 border-amber-600 rounded-lg shadow-lg flex items-center justify-center transform rotate-3 hover:rotate-0 transition-transform duration-300">
-                        <div className="text-xl font-bold text-amber-900">
-                          {diceRoll === 1 && '⚀'}
-                          {diceRoll === 2 && '⚁'}
-                          {diceRoll === 3 && '⚂'}
-                          {diceRoll === 4 && '⚃'}
-                          {diceRoll === 5 && '⚄'}
-                          {diceRoll === 6 && '⚅'}
-                        </div>
-                      </div>
-                      {/* キラキラエフェクト */}
-                      <div className="absolute -top-1 -right-1 text-amber-400 animate-pulse">✨</div>
-                      <div className="absolute -bottom-1 -left-1 text-amber-300 animate-pulse">✨</div>
-                    </div>
-                    
-                    {/* 結果テキスト */}
-                    <div className="text-center">
-                      <p className="text-amber-300 font-serif text-lg font-bold">{diceRoll}</p>
-                      <p className="text-amber-200 font-serif text-xs italic">
-                        {diceRoll === 1 && '慎重な一歩'}
-                        {diceRoll === 2 && '着実な歩み'}
-                        {diceRoll === 3 && '心地よいリズム'}
-                        {diceRoll === 4 && '力強い前進'}
-                        {diceRoll === 5 && '躍動する魂'}
-                        {diceRoll === 6 && '運命の導き'}
-                      </p>
-                    </div>
+                {/* シンプルなサイコロ結果表示 */}
+                {diceRoll && (
+                  <div className="text-center">
+                    <span className="text-amber-300 font-serif text-sm">
+                      出目: {diceRoll}
+                    </span>
                   </div>
                 )}
               </div>
