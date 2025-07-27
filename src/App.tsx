@@ -495,32 +495,90 @@ const App = () => {
           </h1>
         </div>
         
-        <div className="bg-black/60 border border-amber-400/30 rounded-lg p-8 backdrop-blur-sm shadow-2xl max-w-md mx-auto">
-          <h2 className="text-xl md:text-2xl font-serif text-amber-200 mb-8 tracking-wide">プレイヤー人数選択</h2>
-          
-          <div className="grid grid-cols-3 gap-3 mb-6">
-            {[2, 3, 4].map(count => (
-              <button
-                key={count}
-                onClick={() => setPlayerCount(count)}
-                className={`py-3 px-4 rounded-lg font-serif font-semibold transition-all duration-300 border-2 ${
-                  playerCount === count 
-                    ? 'bg-amber-600 border-amber-400 text-black' 
-                    : 'bg-purple-900/50 border-amber-400/30 text-amber-200 hover:border-amber-400/60'
-                }`}
-              >
-                {count}人
-              </button>
-            ))}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* ルール説明 */}
+          <div className="bg-black/60 border border-amber-400/30 rounded-lg p-6 backdrop-blur-sm shadow-2xl">
+            <h2 className="text-lg md:text-xl font-serif text-amber-200 mb-4 tracking-wide flex items-center">
+              <span className="mr-2">📜</span>
+              ゲームルール
+            </h2>
+            
+            <div className="space-y-3 text-sm md:text-base text-amber-100 font-serif leading-relaxed">
+              <div className="flex items-start">
+                <span className="text-amber-400 mr-2 font-bold">🎯</span>
+                <div>
+                  <span className="font-semibold text-amber-300">目標：</span>
+                  芸術の道を歩み、80番マスのゴールで作品を完成させよう
+                </div>
+              </div>
+              
+              <div className="flex items-start">
+                <span className="text-amber-400 mr-2 font-bold">🎲</span>
+                <div>
+                  <span className="font-semibold text-amber-300">移動：</span>
+                  サイコロを振って進む。イベントマスで能力値が上昇
+                </div>
+              </div>
+              
+              <div className="flex items-start">
+                <span className="text-amber-400 mr-2 font-bold">🎨</span>
+                <div>
+                  <span className="font-semibold text-amber-300">成長：</span>
+                  感性・技術力・創造力を高めて芸術スタイルを決定
+                </div>
+              </div>
+              
+              <div className="flex items-start">
+                <span className="text-amber-400 mr-2 font-bold">🏆</span>
+                <div>
+                  <span className="font-semibold text-amber-300">作品：</span>
+                  経験値6以上でゴール時に傑作完成、足りなければラストチャンス
+                </div>
+              </div>
+              
+              <div className="mt-4 p-3 bg-amber-900/20 rounded border border-amber-400/20">
+                <div className="text-xs text-amber-300 italic">
+                  💡 各芸術テーマゾーン：キュビズム・印象派・シュルレアリスム・浮世絵
+                </div>
+              </div>
+            </div>
           </div>
-          
-          <div className="space-y-4">
-            <button
-              onClick={() => startGame(playerCount)}
-              className="w-full bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-900 hover:from-emerald-800 hover:to-emerald-800 text-amber-100 font-serif font-semibold py-3 px-6 rounded-lg shadow-xl transition-all duration-300 border-2 border-amber-400 hover:border-amber-300"
-            >
-              ゲーム開始
-            </button>
+
+          {/* プレイヤー人数選択 */}
+          <div className="bg-black/60 border border-amber-400/30 rounded-lg p-6 backdrop-blur-sm shadow-2xl">
+            <h2 className="text-lg md:text-xl font-serif text-amber-200 mb-6 tracking-wide flex items-center">
+              <span className="mr-2">👥</span>
+              プレイヤー人数選択
+            </h2>
+            
+            <div className="grid grid-cols-3 gap-3 mb-6">
+              {[2, 3, 4].map(count => (
+                <button
+                  key={count}
+                  onClick={() => setPlayerCount(count)}
+                  className={`py-3 px-4 rounded-lg font-serif font-semibold transition-all duration-300 border-2 ${
+                    playerCount === count 
+                      ? 'bg-amber-600 border-amber-400 text-black' 
+                      : 'bg-purple-900/50 border-amber-400/30 text-amber-200 hover:border-amber-400/60'
+                  }`}
+                >
+                  {count}人
+                </button>
+              ))}
+            </div>
+            
+            <div className="space-y-4">
+              <button
+                onClick={() => startGame(playerCount)}
+                className="w-full bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-900 hover:from-emerald-800 hover:to-emerald-800 text-amber-100 font-serif font-semibold py-4 px-6 rounded-lg shadow-xl transition-all duration-300 border-2 border-amber-400 hover:border-amber-300 hover:scale-105"
+              >
+                🎮 ゲーム開始
+              </button>
+              
+              <div className="text-center text-xs text-amber-400/70 italic">
+                選択した人数でゲームが始まります
+              </div>
+            </div>
           </div>
         </div>
       </div>
